@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#2193b0">
+  <title>Password Generator Pro</title>
+  <script>
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("service-worker.js")
+        .then(() => console.log("Service Worker registered"))
+        .catch(err => console.error("SW registration failed:", err));
+    }
+  </script>
+</head>
+
+<body>
+  <div class="pass-container">
+    <h2>PASSWORD GENERATOR</h2>
+
+    <div class="options">
+      <div class="option">
+        <label>Password length:</label>
+        <input class="number-box" type="number" id="length" min="4" max="50" value="12">
+      </div>
+
+      <div class="option checked-box">
+        <label>UpperCase:</label>
+        <input type="checkbox" id="upperCase" checked />
+        <label>LowerCase:</label>
+        <input type="checkbox" id="lowerCase" checked />
+      </div>
+
+      <div class="option checked-box">
+        <label>Numbers:</label>
+        <input type="checkbox" id="numbers" checked />
+        <label>Symbols:</label>
+        <input type="checkbox" id="symbols" />
+      </div>
+
+      <div class="option checked-box">
+        <label>Avoid Similar Characters:</label>
+        <input type="checkbox" id="noSimilar" />
+      </div>
+    </div>
+
+    <h3 class="pass-box" id="result"></h3>
+
+    <div class="buttons">
+      <button class="btn" id="generate">Generate</button>
+      <button class="btn" id="copy">Copy</button>
+      <button class="btn" onclick="window.location.href='history.html'">View History</button>
+      <button class="btn" id="toggleMode">🌙 Dark/Light</button>
+    </div>
+
+    <div class="strength-meter">
+      <div id="strengthBar"></div>
+    </div>
+    <p id="strengthText"></p>
+  </div>
+  <script src="script.js"></script>
+</body>
+
+</html>

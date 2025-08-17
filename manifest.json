@@ -1,0 +1,20 @@
+{
+  "name": "Password Generator Pro",
+  "short_name": "PassGen",
+  "start_url": "splash.html",
+  "display": "standalone",
+  "background_color": "#2193b0",
+  "theme_color": "#2193b0",
+  "icons": [
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

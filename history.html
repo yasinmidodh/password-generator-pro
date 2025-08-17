@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Password History</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div class="pass-container">
+    <h2>Generated Password History</h2>
+    <ul id="historyList"></ul>
+    <button class="btn" onclick="clearHistory()">Clear History</button>
+    <button class="btn" onclick="window.location.href='index.html'">Back</button>
+  </div>
+
+  <script>
+    function loadHistory() {
+      let history = JSON.parse(localStorage.getItem("passwordHistory")) || [];
+      const list = document.getElementById("historyList");
+      list.innerHTML = "";
+
+      if (history.length === 0) {
+        list.innerHTML = "<p>No history found.</p>";
+        return;
+      }
+
+      history.forEach((item, index) => {
+        const li = document.createElement("li");
+        li.style.margin = "8px 0";
+
+        const passText = document.createElement("span");
+        passText.textContent = `${item.password}  —  (${item.date})`;
+
+        const copyBtn = document.createElement("button");
+        copyBtn.textContent = "📋";
+        copyBtn.className = "btn";
+        copyBtn.style.marginLeft = "10px";
+        copyBtn.onclick = () => {
+          navigator.clipboard.writeText(item.password);
+          alert("Password copied!");
+        };
+
+        const favBtn = document.createElement("button");
+        favBtn.textContent = item.fav ? "⭐" : "☆";
+        favBtn.className = "btn";
+        favBtn.onclick = () => {
+          history[index].fav = !history[index].fav;
+          localStorage.setItem("passwordHistory", JSON.stringify(history));
+          loadHistory();
+        };
+
+        li.appendChild(passText);
+        li.appendChild(copyBtn);
+        li.appendChild(favBtn);
+        list.appendChild(li);
+      });
+    }
+
+    function clearHistory() {
+      localStorage.removeItem("passwordHistory");
+      loadHistory();
+    }
+
+    loadHistory();
+  </script>
+</body>
+
+</html>
